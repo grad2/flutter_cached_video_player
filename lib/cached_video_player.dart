@@ -388,6 +388,12 @@ class CachedVideoPlayerController
     super.dispose();
   }
 
+  Future<void> enterFullScreen(bool isEnter) async {
+    if(_videoPlayerPlatform is VideoPlayerPluginHls){
+      (_videoPlayerPlatform as VideoPlayerPluginHls).enterFullScreen(textureId, isEnter);
+    }
+  }
+    
   /// Starts playing the video.
   ///
   /// This method returns a future that completes as soon as the "play" command
