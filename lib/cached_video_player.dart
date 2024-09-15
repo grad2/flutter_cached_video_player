@@ -8,7 +8,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player_platform_interface/video_player_platform_interface.dart';
-import 'package:video_player_web_hls/video_player_web_hls.dart';
 export 'package:video_player_platform_interface/video_player_platform_interface.dart'
     show DurationRange, DataSourceType, VideoFormat, VideoPlayerOptions;
 
@@ -389,9 +388,7 @@ class CachedVideoPlayerController
   }
 
   Future<void> enterFullScreen(bool isEnter) async {
-    if(_videoPlayerPlatform is VideoPlayerPluginHls){
-      (_videoPlayerPlatform as VideoPlayerPluginHls).enterFullScreen(textureId, isEnter);
-    }
+    _videoPlayerPlatform.enterFullScreen(textureId, isEnter);
   }
     
   /// Starts playing the video.
@@ -961,5 +958,11 @@ class ClosedCaption extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+extension VideoPlayerPlatformE on VideoPlayerPlatform {
+  Future<void> enterFullScreen(int textureId, bool isEnter) {
+    throw UnimplementedError('enterFullScreen(int textureId, bool isEnter)');
   }
 }
