@@ -387,10 +387,10 @@ class CachedVideoPlayerController
     super.dispose();
   }
 
-  Future<void> enterFullScreen(bool isEnter) async {
-    _videoPlayerPlatform.enterFullScreen(textureId, isEnter);
+  Future<void> enterFullScreen(bool value) async {
+    _videoPlayerPlatform.setLooping(textureId, value);
   }
-    
+
   /// Starts playing the video.
   ///
   /// This method returns a future that completes as soon as the "play" command
@@ -418,7 +418,8 @@ class CachedVideoPlayerController
     if (!value.isInitialized || _isDisposed) {
       return;
     }
-    await _videoPlayerPlatform.setLooping(_textureId, value.isLooping);
+    ///TODO this fullscrren is not looping
+    //await _videoPlayerPlatform.setLooping(_textureId, value.isLooping);
   }
 
   Future<void> _applyPlayPause() async {
@@ -958,11 +959,5 @@ class ClosedCaption extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-extension VideoPlayerPlatformE on VideoPlayerPlatform {
-  Future<void> enterFullScreen(int textureId, bool isEnter) {
-    throw UnimplementedError('enterFullScreen(int textureId, bool isEnter)');
   }
 }
